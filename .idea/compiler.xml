@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="MA4_2005_LojaVeiculo" />
+        <module name="n2_viotti" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MA4_2005_LojaVeiculo" target="14" />
+      <module name="n2_viotti" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>

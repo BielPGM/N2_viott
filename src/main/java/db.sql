@@ -1,33 +1,28 @@
-create database Loja;
+CREATE DATABASE IF NOT EXISTS Loja;
+USE Loja;
 
-use Loja;
-
-CREATE TABLE Proprietario (
- codProprietario INT NOT NULL,
- Nome VARCHAR(50)
+CREATE TABLE Cliente (
+ id INT PRIMARY KEY AUTO_INCREMENT,
+ nome VARCHAR(60) NOT NULL,
+ sobrenome VARCHAR(120) NOT NULL,
+ endereco TEXT NOT NULL,
+ cep INT(8) NOT NULL
 );
 
-ALTER TABLE Proprietario ADD CONSTRAINT PK_Proprietario PRIMARY KEY (codProprietario);
-
-
-CREATE TABLE Veiculo (
- Placa VARCHAR(7) NOT NULL,
- codProprietario INT NOT NULL,
- Modelo VARCHAR(50),
- Valor DECIMAL(10,2)
+CREATE TABLE Produto (
+ id INT PRIMARY KEY AUTO_INCREMENT,
+ quantidade INT DEFAULT 0,
+ preco DECIMAL(6,2) NOT NULL,
+ nome_produto VARCHAR(255)
 );
 
-ALTER TABLE Veiculo ADD CONSTRAINT PK_Veiculo PRIMARY KEY (Placa);
+CREATE TABLE Pedido (
+ id INT PRIMARY KEY AUTO_INCREMENT,
+ id_cliente INT NOT NULL,
+ id_produto INT NOT NULL,
+ quantidade INT DEFAULT 1,
+ data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-
-ALTER TABLE Veiculo ADD CONSTRAINT FK_Veiculo_0 FOREIGN KEY (codProprietario) 
-REFERENCES Proprietario (codProprietario);
-
-INSERT INTO Proprietario values (1, 'João da Silva'),
-                                (2, 'Pedro Antonio'),
-                                (3, 'Maria Antonia');
-
-INSERT INTO Veiculo values ('ABC1234', 1, 'Gol', 14800),
-                           ('FAP8734', 2, 'Marea', 5900),
-                           ('CLW7622', 1, 'Fusca', 11500);
-
+ALTER TABLE Pedido ADD CONSTRAINT FOREIGN KEY (id_cliente) REFERENCES Cliente (id);
+ALTER TABLE Pedido ADD CONSTRAINT FOREIGN KEY (id_produto) REFERENCES Produto (id);
